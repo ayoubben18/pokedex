@@ -1,6 +1,6 @@
 package main
 
+// we are building a REPL read evaluate print loop
 func main() {
-	//print hello world
-	println("Hello World")
+	startRepl()
 }
