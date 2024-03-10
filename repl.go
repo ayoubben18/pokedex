@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func startRepl() {
+func startRepl(cfg *config) {
 
 	scanner := bufio.NewScanner(os.Stdin)
 	// code at the bottom to a loop
@@ -24,9 +24,13 @@ func startRepl() {
 		availableCommands := cliCommands()
 		command, ok := availableCommands[commandName]
 		if !ok {
+			fmt.Println("unknown command: ", commandName)
 			continue
 		}
-		command.callback()
+		err := command.callback(cfg)
+		if err != nil {
+			fmt.Println(err)
+		}
 
 	}
 }
@@ -34,7 +38,7 @@ func startRepl() {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func(c *config) error
 }
 
 // func returns map of strings to cli command
@@ -44,6 +48,16 @@ func cliCommands() map[string]cliCommand {
 			name:        "exit",
 			description: "exit the program",
 			callback:    callBackExit,
+		},
+		"map": {
+			name:        "map",
+			description: "Lists some location areas",
+			callback:    callbackMap,
+		},
+		"mapb": {
+			name:        "map back",
+			description: "Lists previous location areas",
+			callback:    callbackMapB,
 		},
 		"help": {
 			name:        "help",
