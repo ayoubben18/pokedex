@@ -64,10 +64,25 @@ func cliCommands() map[string]cliCommand {
 			description: "Lists previous location areas",
 			callback:    callbackMapB,
 		},
+		"catch": {
+			name:        "catch {Pokemon}",
+			description: "Catches a pokemon",
+			callback:    callbackCatch,
+		},
 		"explore": {
 			name:        "explore {Location_area}",
 			description: "Lists the pokemons in a location area",
 			callback:    callbackExplore,
+		},
+		"inspect": {
+			name:        "inspect {Pokemon}",
+			description: "Inspects a pokemon",
+			callback:    callbackInspect,
+		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "Lists all caught pokemons",
+			callback:    callbackPokedex,
 		},
 		"help": {
 			name:        "help",
